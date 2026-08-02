@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import {
@@ -9,13 +8,6 @@ import {
   IconPin,
 } from "@/components/icons";
 import { mapsLinkUrl, nav, site, whatsappUrl } from "@/lib/site";
-
-/**
- * Çatı marka kilidi — public/brand/toganworks.png dosyasının gerçek piksel
- * ölçüsü. Dosya değiştirilirse bu iki sayı da güncellenmeli; yanlış oran
- * logonun etrafında boşluk bırakır.
- */
-const TOGANWORKS = { width: 2375, height: 271 };
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -115,18 +107,16 @@ export function Footer() {
           <p className="min-w-0">
             © {year} {site.name}. Tüm hakları saklıdır.
           </p>
-          {/* Kilit satır içi bir sözcük gibi akar: dar ekranda satır kendi
-              doğal yerinden kırılır, geniş ekranda tek satırda kalır. */}
           <p className="min-w-0 text-pretty sm:shrink-0 sm:text-end">
             Bir{" "}
-            <Image
-              src="/brand/toganworks.png"
-              alt="Toganworks"
-              width={TOGANWORKS.width}
-              height={TOGANWORKS.height}
-              quality={100}
-              className="inline-block h-[1.2em] w-auto max-w-full translate-y-[0.14em] sm:h-[1.35em]"
-            />{" "}
+            <a
+              href={site.parent.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-navy-700 underline decoration-line underline-offset-4 transition-colors duration-300 hover:text-navy-950 hover:decoration-navy-400"
+            >
+              {site.parent.name}
+            </a>{" "}
             eğitim markasıdır.
           </p>
         </div>

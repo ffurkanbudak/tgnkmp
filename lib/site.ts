@@ -43,6 +43,12 @@ export const site = {
   social: {
     instagram: "https://instagram.com/togankampus",
   },
+
+  /** Bağlı olunan çatı marka — footer künyesinde geçer. */
+  parent: {
+    name: "Toganworks",
+    url: "https://toganworks.com",
+  },
 } as const;
 
 export const whatsappUrl = `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(
