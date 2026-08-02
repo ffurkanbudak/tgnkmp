@@ -157,33 +157,38 @@ export function Header() {
               condensed ? "h-16 md:h-[4.5rem]" : "h-20 md:h-24"
             }`}
           >
-            <div className="relative z-10 flex shrink-0 items-center gap-3.5 md:gap-4">
+            <div className="relative z-10 flex min-w-0 items-center gap-3 sm:gap-3.5 md:gap-4">
               <Link
                 href="/"
                 aria-label={`${site.name} | Ana Sayfa`}
-                className="transition-opacity duration-300 hover:opacity-70"
+                className="min-w-0 transition-opacity duration-300 hover:opacity-70"
               >
-                <Logo className={condensed ? "h-7 md:h-8" : "h-8 md:h-9"} />
+                <Logo
+                  className={
+                    condensed ? "h-6 sm:h-7 md:h-8" : "h-7 sm:h-8 md:h-9"
+                  }
+                />
               </Link>
+              {/* Dar ekranda yer açmak için: ayraç ve rozet yalnızca sm ve üzeri */}
               <span
                 aria-hidden="true"
-                className="h-6 w-px bg-line md:h-7"
+                className="hidden h-6 w-px shrink-0 bg-line sm:block md:h-7"
               />
               <IconGraduationCap
                 aria-hidden="true"
-                className="size-5 shrink-0 text-navy-700 md:size-[1.375rem]"
+                className="hidden size-5 shrink-0 text-navy-700 sm:block md:size-[1.375rem]"
               />
             </div>
 
-            <div className="relative z-10 flex items-center gap-2.5">
+            <div className="relative z-10 flex shrink-0 items-center gap-2 sm:gap-2.5">
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp'tan yazın"
-                className="grid size-11 place-items-center rounded-[14px] bg-[#25D366] text-white shadow-[0_1px_2px_rgba(20,120,60,0.25),0_10px_24px_-14px_rgba(37,211,102,0.9)] transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:shadow-[0_2px_4px_rgba(20,120,60,0.28),0_16px_32px_-16px_rgba(37,211,102,1)] active:scale-95 md:size-12"
+                className="grid size-10 place-items-center rounded-xl bg-[#25D366] text-white shadow-[0_1px_2px_rgba(20,120,60,0.25),0_10px_24px_-14px_rgba(37,211,102,0.9)] transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:shadow-[0_2px_4px_rgba(20,120,60,0.28),0_16px_32px_-16px_rgba(37,211,102,1)] active:scale-95 sm:size-11 sm:rounded-[14px] md:size-12"
               >
-                <IconWhatsapp className="size-[22px]" />
+                <IconWhatsapp className="size-5 sm:size-[22px]" />
               </a>
 
               <button
@@ -191,9 +196,12 @@ export function Header() {
                 onClick={() => setOpen((v) => !v)}
                 aria-expanded={open}
                 aria-controls="ana-menu"
-                className="group inline-flex h-11 items-center gap-3 rounded-[14px] border border-navy-900/15 px-4 text-[0.875rem] font-semibold tracking-[-0.01em] text-navy-900 transition-colors duration-300 hover:border-navy-900/40 md:h-12 md:px-5"
+                className="group inline-flex h-10 items-center gap-3 rounded-xl border border-navy-900/15 px-3 text-[0.875rem] font-semibold tracking-[-0.01em] text-navy-900 transition-colors duration-300 hover:border-navy-900/40 sm:h-11 sm:rounded-[14px] sm:px-4 md:h-12 md:px-5"
               >
-                <span>{open ? "Kapat" : "Menü"}</span>
+                {/* Dar ekranda etiket yalnızca ekran okuyucuya kalır, buton ikona iner */}
+                <span className="sr-only sm:not-sr-only">
+                  {open ? "Kapat" : "Menü"}
+                </span>
                 <span aria-hidden="true" className="relative block h-2.5 w-4.5">
                   <span
                     className={`absolute left-0 h-px w-full bg-current transition-all duration-400 ease-[var(--ease-out-expo)] ${

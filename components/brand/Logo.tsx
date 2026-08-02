@@ -36,7 +36,7 @@ export function Logo({
       priority
       quality={100}
       onError={useReversed ? () => setLightMissing(true) : undefined}
-      className={`w-auto object-contain object-left ${className}`}
+      className={`w-auto max-w-full object-contain object-left ${className}`}
       style={{ aspectRatio: RATIO }}
     />
   );

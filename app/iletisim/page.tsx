@@ -60,9 +60,7 @@ export default function ContactPage() {
               <div className="lg:sticky lg:top-28">
                 <Reveal delay={0.08}>
                   <div className="rounded-[var(--radius-card)] bg-navy-900 p-8 text-white lg:p-10">
-                    <h2 className="text-eyebrow text-navy-300">
-                      Doğrudan Ulaşın
-                    </h2>
+                    <h2 className="text-eyebrow text-navy-300">İletişim</h2>
 
                     <ul className="mt-8 space-y-1">
                       <ContactRow
@@ -70,7 +68,7 @@ export default function ContactPage() {
                         external
                         icon={<IconWhatsapp className="size-[18px]" />}
                         label="WhatsApp"
-                        value="Anında yazışın"
+                        value="Bize Ulaşın!"
                       />
                       <ContactRow
                         href={site.phone.href}

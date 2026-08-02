@@ -2,10 +2,12 @@
 
 import { educationLevelOptions, subjectOptions } from "@/lib/content";
 import {
+  buildWhatsappHref,
   CONTACT_SUCCESS_MESSAGE,
   type ContactFieldName,
   type ContactState,
 } from "@/lib/contact";
+import { site } from "@/lib/site";
 
 /** Türkiye cep/sabit hat: 10 rakam, isteğe bağlı 0 veya +90 önek. */
 const PHONE_DIGITS = /^(?:\+?90)?0?\d{10}$/;
@@ -78,16 +80,21 @@ export async function submitContact(
     };
   }
 
-  return { status: "success", message: CONTACT_SUCCESS_MESSAGE, errors: {} };
+  return {
+    status: "success",
+    message: CONTACT_SUCCESS_MESSAGE,
+    errors: {},
+    whatsappHref: buildWhatsappHref(values, site.whatsapp.number),
+  };
 }
 
 /**
- * TESLİMAT NOKTASI — henüz bir e-posta/CRM sağlayıcısı bağlanmadı.
+ * İKİNCİL KAYIT — talebin asıl teslimatı WhatsApp üzerinden yapılır.
  *
- * Form uçtan uca çalışır ve doğrulama yapar, ancak talep şu anda yalnızca
- * sunucu günlüğüne yazılır; kalıcı bir yere düşmez. Canlıya almadan önce
- * burayı gerçek bir servise bağlayın (e-posta gönderimi, CRM kaydı veya
- * veritabanı). Fonksiyon imzası değişmeden bağlanabilir.
+ * Doğrulama geçtikten sonra form içeriği önceden doldurulmuş bir WhatsApp
+ * mesajına çevrilip kurumun numarasına yönlendirilir. Burası ise yalnızca
+ * sunucu tarafındaki iz kaydıdır; kalıcı bir yere düşmez. Kalıcı arşiv
+ * isteniyorsa (e-posta, CRM veya veritabanı) imza değişmeden buraya bağlanır.
  */
 async function deliverInquiry(values: Record<ContactFieldName, string>) {
   console.info("[togan-kampus] yeni ön görüşme talebi", {

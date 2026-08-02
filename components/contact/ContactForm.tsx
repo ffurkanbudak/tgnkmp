@@ -33,29 +33,41 @@ export function ContactForm() {
     if (el instanceof HTMLElement) el.focus();
   }, [state]);
 
+  // Doğrulama geçince WhatsApp'ı hazır mesajla aç. Tarayıcı engellerse karttaki
+  // düğme devrede kalır; kullanıcı hiçbir durumda yolda kalmaz.
+  const openedRef = useRef(false);
+  useEffect(() => {
+    if (state.status !== "success" || !state.whatsappHref) return;
+    if (openedRef.current) return;
+    openedRef.current = true;
+    window.open(state.whatsappHref, "_blank", "noopener,noreferrer");
+  }, [state]);
+
   if (state.status === "success") {
     return (
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="rounded-[var(--radius-card)] border border-line bg-paper p-8 lg:p-12"
+        className="rounded-[var(--radius-card)] border border-line bg-paper p-6 sm:p-8 lg:p-12"
         role="status"
         aria-live="polite"
       >
         <span className="grid size-12 place-items-center rounded-full bg-navy-900 text-white">
           <IconCheck className="size-5" />
         </span>
-        <h3 className="text-h3 mt-7 text-navy-950">Talebiniz alındı.</h3>
+        <h3 className="text-h3 mt-7 text-navy-950">Talebiniz hazır.</h3>
         <p className="text-body mt-4 max-w-md text-muted">{state.message}</p>
+        <p className="mt-3 max-w-md text-[0.8125rem] leading-relaxed text-faint">
+          WhatsApp kendiliğinden açılmadıysa aşağıdaki düğmeye dokunun.
+        </p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <ButtonLink
-            href={whatsappUrl}
+            href={state.whatsappHref ?? whatsappUrl}
             external
-            variant="quiet"
             icon={<IconWhatsapp className="size-[18px]" />}
           >
-            WhatsApp&apos;tan Yazın!
+            WhatsApp&apos;tan Gönderin!
           </ButtonLink>
         </div>
       </motion.div>

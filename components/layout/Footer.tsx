@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import {
@@ -15,10 +16,10 @@ export function Footer() {
   return (
     <footer className="relative border-t border-line bg-paper text-navy-900">
       <div className="container-page">
-        <div className="grid gap-14 border-b border-line py-20 lg:grid-cols-12 lg:gap-10 lg:py-24">
+        <div className="grid gap-11 border-b border-line py-14 sm:gap-14 sm:py-20 lg:grid-cols-12 lg:gap-10 lg:py-24">
           {/* Marka */}
-          <div className="lg:col-span-5">
-            <Logo className="h-9" />
+          <div className="min-w-0 lg:col-span-5">
+            <Logo className="h-7 sm:h-8 md:h-9" />
             <p className="text-body mt-7 max-w-sm text-muted">
               İlkokul, ortaokul ve lise kademelerinde birebir eğitim ve akademik
               koçluk. Her öğrenci için tek bir plan.
@@ -63,7 +64,7 @@ export function Footer() {
           </nav>
 
           {/* İletişim */}
-          <div className="lg:col-span-4">
+          <div className="min-w-0 lg:col-span-4">
             <h2 className="text-eyebrow text-faint">İletişim</h2>
             <ul className="mt-6 space-y-5">
               <li>
@@ -89,10 +90,10 @@ export function Footer() {
                   href={mapsLinkUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-body group flex items-start gap-3 text-navy-700 transition-colors duration-300 hover:text-navy-950"
+                  className="text-body group flex min-w-0 items-start gap-3 text-navy-700 transition-colors duration-300 hover:text-navy-950"
                 >
                   <IconPin className="mt-1 size-[18px] shrink-0 text-faint transition-colors duration-300 group-hover:text-brand-600" />
-                  <span>
+                  <span className="min-w-0 break-words">
                     {site.address.line2}
                     <br />
                     {site.address.city}
@@ -103,11 +104,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 py-8 text-[0.8125rem] text-faint sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 py-8 text-[0.8125rem] text-faint sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <p>
             © {year} {site.name}. Tüm hakları saklıdır.
           </p>
-          <p>{site.tagline}</p>
+          <p className="flex flex-wrap items-center gap-x-[0.4em] gap-y-1">
+            Bir
+            <Image
+              src="/brand/toganworks.png"
+              alt="Toganworks"
+              width={2374}
+              height={271}
+              quality={100}
+              className="h-[1.35em] w-auto object-contain"
+              style={{ aspectRatio: 2374 / 271 }}
+            />
+            eğitim markasıdır.
+          </p>
         </div>
       </div>
     </footer>
