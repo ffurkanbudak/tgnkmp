@@ -10,6 +10,13 @@ import {
 } from "@/components/icons";
 import { mapsLinkUrl, nav, site, whatsappUrl } from "@/lib/site";
 
+/**
+ * Çatı marka kilidi — public/brand/toganworks.png dosyasının gerçek piksel
+ * ölçüsü. Dosya değiştirilirse bu iki sayı da güncellenmeli; yanlış oran
+ * logonun etrafında boşluk bırakır.
+ */
+const TOGANWORKS = { width: 2375, height: 271 };
+
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -104,21 +111,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 py-8 text-[0.8125rem] text-faint sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-          <p>
+        <div className="flex flex-col gap-2.5 py-8 text-[0.8125rem] leading-relaxed text-faint sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+          <p className="min-w-0">
             © {year} {site.name}. Tüm hakları saklıdır.
           </p>
-          <p className="flex flex-wrap items-center gap-x-[0.4em] gap-y-1">
-            Bir
+          {/* Kilit satır içi bir sözcük gibi akar: dar ekranda satır kendi
+              doğal yerinden kırılır, geniş ekranda tek satırda kalır. */}
+          <p className="min-w-0 text-pretty sm:shrink-0 sm:text-end">
+            Bir{" "}
             <Image
               src="/brand/toganworks.png"
               alt="Toganworks"
-              width={2374}
-              height={271}
+              width={TOGANWORKS.width}
+              height={TOGANWORKS.height}
               quality={100}
-              className="h-[1.35em] w-auto object-contain"
-              style={{ aspectRatio: 2374 / 271 }}
-            />
+              className="inline-block h-[1.2em] w-auto max-w-full translate-y-[0.14em] sm:h-[1.35em]"
+            />{" "}
             eğitim markasıdır.
           </p>
         </div>
