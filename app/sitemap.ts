@@ -1,0 +1,33 @@
+import type { MetadataRoute } from "next";
+import { site } from "@/lib/site";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  return [
+    { url: site.url, lastModified: now, changeFrequency: "monthly", priority: 1 },
+    {
+      url: `${site.url}/hakkinda`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${site.url}/egitim`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${site.url}/kocluk`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${site.url}/iletisim`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
+  ];
+}

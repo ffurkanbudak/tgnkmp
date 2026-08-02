@@ -1,0 +1,296 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   TOGAN KAMPÜS — Design tokens
+   A restrained academic system: deep navy, paper white, one decisive red.
+   ========================================================================== */
+
+@theme {
+  /* --- Deep Academic Navy ------------------------------------------------ */
+  --color-navy-50: #f4f6fa;
+  --color-navy-100: #e4e9f2;
+  --color-navy-200: #c6d0e1;
+  --color-navy-300: #98a8c4;
+  --color-navy-400: #63769a;
+  --color-navy-500: #3b4e76;
+  --color-navy-600: #24375e;
+  --color-navy-700: #1a2a4a;
+  --color-navy-800: #131f38;
+  --color-navy-900: #0d1526;
+  --color-navy-950: #070c16;
+
+  /* --- Professional Academic Red ----------------------------------------- */
+  --color-brand-400: #f5626a;
+  --color-brand-500: #f0353c;
+  --color-brand-600: #e01f27;
+  --color-brand-700: #be131a;
+  --color-brand-800: #9c0f15;
+
+  /* --- Soft Neutral Gray -------------------------------------------------- */
+  --color-paper: #ffffff;
+  --color-bone: #f7f8fa;
+  --color-mist: #eff1f5;
+  --color-line: #e3e7ed;
+  --color-muted: #5c6675;
+  --color-faint: #8b94a3;
+
+  /* --- Type --------------------------------------------------------------- */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Motion ------------------------------------------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* --- Rhythm ------------------------------------------------------------- */
+  --spacing-section: clamp(5.5rem, 10vw, 10.5rem);
+  --radius-card: 20px;
+  --radius-pill: 999px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  /* Lenis drives scrolling on capable devices; it disables native smoothing. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-navy-900);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-navy-900);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ==========================================================================
+   Typography utilities
+   ========================================================================== */
+
+/* Not: Türkçe metinde ğ/ü/ö/ş gibi karakterler hem üstte hem altta yer ister.
+   Satır yüksekliği ve harf aralığı, bu karakterler sıkışmayacak biçimde
+   bilerek biraz açık tutulur. */
+@utility text-display {
+  font-size: clamp(2.625rem, 5.6vw, 4.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.028em;
+  font-weight: 600;
+}
+
+@utility text-h2 {
+  font-size: clamp(1.9375rem, 3.4vw, 3.125rem);
+  line-height: 1.1;
+  letter-spacing: -0.026em;
+  font-weight: 600;
+}
+
+@utility text-h3 {
+  font-size: clamp(1.375rem, 1.9vw, 1.75rem);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility text-lead {
+  font-size: clamp(1.0625rem, 1.35vw, 1.3125rem);
+  line-height: 1.62;
+  letter-spacing: -0.012em;
+  font-weight: 400;
+}
+
+@utility text-body {
+  font-size: 1.0125rem;
+  line-height: 1.7;
+  letter-spacing: -0.008em;
+  font-weight: 400;
+}
+
+@utility text-eyebrow {
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Layout utilities
+   ========================================================================== */
+
+/* Geniş, akışkan kap: içerik ekranın tamamını kullanır, yalnızca cömert bir
+   kenar payı bırakır. Dar bir sütuna sıkıştırmak yerine nefes alan bu düzen,
+   sayfaya daha minimal ve daha premium bir duruş verir. */
+@utility container-page {
+  width: 100%;
+  max-width: 118rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 3.5rem;
+  }
+  @media (width >= 96rem) {
+    padding-inline: 4.5rem;
+  }
+}
+
+/* Hairline rules that run the height of a section — the quiet structural
+   signature of the whole site. */
+@utility rule-frame {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Barely-there film grain — stops large navy fields from looking like flat ink. */
+@utility surface-grain {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+}
+
+/* Edge fade for the testimonial marquee */
+@utility mask-edges {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* ==========================================================================
+   Pencil cursor
+   ========================================================================== */
+
+/* Only swap the cursor on precise pointers that can actually hover. */
+@media (hover: hover) and (pointer: fine) {
+  html.has-pencil-cursor,
+  html.has-pencil-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* ==========================================================================
+   Keyframes
+   ========================================================================== */
+
+@keyframes tk-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Hero şemasındaki bağlantı çizgilerinin akışı */
+@keyframes tk-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@keyframes tk-scroll-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+@keyframes ink-fade {
+  from {
+    opacity: 0.9;
+    stroke-dashoffset: var(--ink-len);
+  }
+  60% {
+    opacity: 0.9;
+    stroke-dashoffset: 0;
+  }
+  to {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ==========================================================================
+   Motion preferences
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
