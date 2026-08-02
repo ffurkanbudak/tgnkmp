@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ContactForm } from "@/components/contact/ContactForm";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Section";
 import {
@@ -46,75 +45,63 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* --- Form + bilgiler ---------------------------------------------- */}
+      {/* --- Bilgiler ------------------------------------------------------ */}
       <section className="relative bg-paper pb-[var(--spacing-section)]">
         <div className="container-page">
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-            <div className="lg:col-span-7">
-              <Reveal>
-                <ContactForm />
-              </Reveal>
-            </div>
+          <Reveal>
+            <div className="mx-auto max-w-2xl rounded-[var(--radius-card)] bg-navy-900 p-6 text-white sm:p-8 lg:p-10">
+              <h2 className="text-eyebrow text-navy-300">İletişim</h2>
 
-            <aside className="lg:col-span-5">
-              <div className="lg:sticky lg:top-28">
-                <Reveal delay={0.08}>
-                  <div className="rounded-[var(--radius-card)] bg-navy-900 p-8 text-white lg:p-10">
-                    <h2 className="text-eyebrow text-navy-300">İletişim</h2>
+              <ul className="mt-8 space-y-1">
+                <ContactRow
+                  href={whatsappUrl}
+                  external
+                  icon={<IconWhatsapp className="size-[18px]" />}
+                  label="WhatsApp"
+                  value="Bize Ulaşın!"
+                />
+                <ContactRow
+                  href={site.phone.href}
+                  icon={<IconPhone className="size-[18px]" />}
+                  label="Telefon"
+                  value={site.phone.display}
+                />
+                <ContactRow
+                  href={site.email.href}
+                  icon={<IconMail className="size-[18px]" />}
+                  label="E-posta"
+                  value={site.email.display}
+                />
+                <ContactRow
+                  href={mapsLinkUrl}
+                  external
+                  icon={<IconPin className="size-[18px]" />}
+                  label="Adres"
+                  value={`${site.address.line2}, ${site.address.city}`}
+                />
+              </ul>
 
-                    <ul className="mt-8 space-y-1">
-                      <ContactRow
-                        href={whatsappUrl}
-                        external
-                        icon={<IconWhatsapp className="size-[18px]" />}
-                        label="WhatsApp"
-                        value="Bize Ulaşın!"
-                      />
-                      <ContactRow
-                        href={site.phone.href}
-                        icon={<IconPhone className="size-[18px]" />}
-                        label="Telefon"
-                        value={site.phone.display}
-                      />
-                      <ContactRow
-                        href={site.email.href}
-                        icon={<IconMail className="size-[18px]" />}
-                        label="E-posta"
-                        value={site.email.display}
-                      />
-                      <ContactRow
-                        href={mapsLinkUrl}
-                        external
-                        icon={<IconPin className="size-[18px]" />}
-                        label="Adres"
-                        value={`${site.address.line2}, ${site.address.city}`}
-                      />
-                    </ul>
-
-                    <div className="mt-9 border-t border-white/10 pt-8">
-                      <h3 className="text-eyebrow flex items-center gap-2.5 text-navy-300">
-                        <IconClock className="size-4" />
-                        Çalışma Saatleri
-                      </h3>
-                      <dl className="mt-6 space-y-3.5">
-                        {site.hours.map((row) => (
-                          <div
-                            key={row.days}
-                            className="flex items-baseline justify-between gap-4 text-[0.9375rem]"
-                          >
-                            <dt className="text-navy-300">{row.days}</dt>
-                            <dd className="font-medium tabular-nums text-white">
-                              {row.time}
-                            </dd>
-                          </div>
-                        ))}
-                      </dl>
+              <div className="mt-9 border-t border-white/10 pt-8">
+                <h3 className="text-eyebrow flex items-center gap-2.5 text-navy-300">
+                  <IconClock className="size-4" />
+                  Çalışma Saatleri
+                </h3>
+                <dl className="mt-6 space-y-3.5">
+                  {site.hours.map((row) => (
+                    <div
+                      key={row.days}
+                      className="flex items-baseline justify-between gap-4 text-[0.9375rem]"
+                    >
+                      <dt className="text-navy-300">{row.days}</dt>
+                      <dd className="font-medium tabular-nums text-white">
+                        {row.time}
+                      </dd>
                     </div>
-                  </div>
-                </Reveal>
+                  ))}
+                </dl>
               </div>
-            </aside>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

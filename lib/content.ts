@@ -504,7 +504,7 @@ export const aboutPage = {
 export const contactPage = {
   eyebrow: "İletişim",
   title: "Ön görüşme talebi oluşturun.",
-  lead: "Formu doldurun; eğitim danışmanımız aynı gün içinde size dönüş yapsın. Dilerseniz doğrudan telefonla da ulaşabilirsiniz.",
+  lead: "WhatsApp, telefon veya e-posta ile bize ulaşın; eğitim danışmanımız aynı gün içinde size dönüş yapsın.",
   formNote:
     "Paylaştığınız bilgiler yalnızca ön görüşme planlaması için kullanılır, üçüncü kişilerle paylaşılmaz.",
 } as const;
